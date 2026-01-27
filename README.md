@@ -45,9 +45,6 @@
 | **`genvar`** | `bit_sync.sv`, `reset_sync.sv` | `genvar i;` |
 | **`generate` Blocks** | `bit_sync.sv`, `reset_sync.sv` | `generate for (i=0; i<NO_STAGES; i=i+1) ...` |
 | **`integer`** | `reg_file.sv`, testbenches | `integer i;` |
-| **`struct`** | *Not Used* | |
-| **`union`** | *Not Used* | |
-| **`interface`** | *Not Used* | |
 
 ## **Hierarchy & Connectivity**
 | Feature | Location | Example |
