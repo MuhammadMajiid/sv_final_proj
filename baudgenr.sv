@@ -1,14 +1,14 @@
 module baudgenr(
   input wire         i_arst_n,       //  Active low reset.
-  input wire         i_clk,          //  The System's main clock 200MHz.
+  input wire         i_clk,          //  The System's main clock 100MHz.
   input wire  [5:0]  i_prescale,   //  Baud Rate agreed upon by the Tx and Rx units.
 
   output reg         o_clk_scaled    //  Clocking output for the other modules.
 );
 
 //  Internal declarations
-reg [2:0]  final_value;  //  Holds the number of ticks for each BaudRate.
-reg [2:0]  clock_ticks;  //  Counts untill it equals final_value, Timer principle.
+reg [6:0]  final_value;  //  Holds the number of ticks for each BaudRate.
+reg [6:0]  clock_ticks;  //  Counts untill it equals final_value, Timer principle.
 
 //  Encoding the different Baud Rates
 localparam sampl8  = 6'd8,
@@ -19,12 +19,12 @@ localparam sampl8  = 6'd8,
 always_comb
 begin
     unique case (i_prescale)
-      //  All these ratio ticks are calculated for 200MHz Clock,
+      //  All these ratio ticks are calculated for 100MHz Clock,
       //  The values shall change with the change of the clock frequency.
-      sampl8 : final_value = 3'd2;     //  8  sample rate.
-      sampl16: final_value = 3'd1;     //  16 sample rate.
-      sampl32: final_value = 3'd0;     //  32 sample rate.
-      default: final_value = 3'd2;     //  8  sample rate.
+      sampl8 : final_value = 'd54;     //  8  sample rate.
+      sampl16: final_value = 'd27;     //  16 sample rate.
+      sampl32: final_value = 'd13;     //  32 sample rate.
+      default: final_value = 'd54;     //  8  sample rate.
     endcase
 end
 

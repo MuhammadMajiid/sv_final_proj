@@ -25,7 +25,7 @@ module piso
     always_ff @(posedge i_clk, negedge i_arst_n) begin
         if (!i_arst_n)          frame_r <= {11{1'b1}};
         else begin
-            if (i_data_valid) begin
+            if (i_data_valid && (next_state == IDLE)) begin
                 if (i_par_en)   frame_r <= {1'b1,i_par_bit,i_p_data,1'b0};
                 else            frame_r <= {2'b11,i_p_data,1'b0};
             end
@@ -40,7 +40,7 @@ module piso
         else                                         stop_count <= stop_count + 4'd1;
     end
 
-    assign count_full = (stop_count == 4'd11);
+    assign count_full = (stop_count == 4'd10);
 
     //  Transmission logic FSM
     always_ff @(posedge i_clk, negedge i_arst_n) begin
@@ -65,7 +65,7 @@ module piso
             o_busy  = 1'b0;
         end
         else begin
-            if ((next_state == ACTIVE) && (stop_count != 4'd0)) begin
+            if ((next_state == ACTIVE)) begin
                 o_tx    = frame_man[0];
                 o_busy      = 1'b1;
                 frame_man = frame_r >> 1;

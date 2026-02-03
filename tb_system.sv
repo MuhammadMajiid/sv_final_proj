@@ -30,6 +30,7 @@ parameter STOP_TIME   = (5)*1000_000;
 logic [7:0] rd_mem [0:63];
 logic [7:0] wr_mem [0:15];
 logic [7:0] expec_out_mem [0:15];
+logic [10:0] tb_tx_out_reg;
 
 //--------------------------Internals--------------------------//
 logic tx_clk;
@@ -106,11 +107,13 @@ end
 //--------------------------Write Output--------------------------//
 always @(negedge tx_clk) begin
     if (tb_busy) begin     
+        tb_tx_out_reg = 'h7ff;
         // Rx Modelling for Output
         for (k=0 ; k<FRAME_ITR ; k=k+1) begin
             @(posedge tx_clk);
-            wr_mem[m][k] = tb_tx_out;
+            tb_tx_out_reg = {tb_tx_out,tb_tx_out_reg[10:1]};
         end
+        wr_mem[m] = tb_tx_out_reg[8:1];
         //----------------------------------------- 
         // write output in a file
         fh = $fopen(WRITE_FILE, "a");

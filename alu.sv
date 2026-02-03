@@ -35,41 +35,73 @@ localparam  ADD   = 4'b0000,
             SLR   = 4'b1110;
 
 //-----------------ALU Logic-----------------\\
-always_ff @(posedge i_clk, negedge i_arst_n) begin
-    if (!i_arst_n) begin
-        o_alu_res <= 'd0;
-        o_valid   <= 1'b0;
-    end
-    else if (i_enable) begin
-        o_valid   <= 1'b1;
+always_comb begin
+    if (i_enable) begin
+        o_valid   = 1'b1;
         case (i_alu_fun)
             // Arithmitic Operations
-            ADD : o_alu_res <= i_operan_a + i_operan_b;
-            SUB : o_alu_res <= i_operan_a - i_operan_b;
-            MUL : o_alu_res <= i_operan_a * i_operan_b;
-            DIV : o_alu_res <= i_operan_a / i_operan_b;
+            ADD : o_alu_res = i_operan_a + i_operan_b;
+            SUB : o_alu_res = i_operan_a - i_operan_b;
+            MUL : o_alu_res = i_operan_a * i_operan_b;
+            DIV : o_alu_res = i_operan_a / i_operan_b;
             // Logical Operations
-            AND : o_alu_res <= i_operan_a & i_operan_b;
-            OR  : o_alu_res <= i_operan_a | i_operan_b;
-            XOR : o_alu_res <= i_operan_a ^ i_operan_b;
-            NAND: o_alu_res <= ~(i_operan_a & i_operan_b);
-            NOR : o_alu_res <= ~(i_operan_a | i_operan_b);
-            XNOR: o_alu_res <= ~(i_operan_a ^ i_operan_b);
+            AND : o_alu_res = i_operan_a & i_operan_b;
+            OR  : o_alu_res = i_operan_a | i_operan_b;
+            XOR : o_alu_res = i_operan_a ^ i_operan_b;
+            NAND: o_alu_res = ~(i_operan_a & i_operan_b);
+            NOR : o_alu_res = ~(i_operan_a | i_operan_b);
+            XNOR: o_alu_res = ~(i_operan_a ^ i_operan_b);
             // Comparator Operations
-            CMPE: o_alu_res <= (i_operan_a == i_operan_b);
-            CMPG: o_alu_res <= (i_operan_a > i_operan_b)? 'd2: 'b0;
-            CMPL: o_alu_res <= (i_operan_a < i_operan_b)? 'd3: 'b0;
+            CMPE: o_alu_res = (i_operan_a == i_operan_b);
+            CMPG: o_alu_res = (i_operan_a > i_operan_b)? 'd2: 'b0;
+            CMPL: o_alu_res = (i_operan_a < i_operan_b)? 'd3: 'b0;
             // Shift Operations
-            SLL : o_alu_res <= i_operan_a << 1;
-            SLR : o_alu_res <= i_operan_a >> 1;
+            SLL : o_alu_res = i_operan_a << 1;
+            SLR : o_alu_res = i_operan_a >> 1;
             // Default Output
-            default: o_alu_res <= 'b0;
+            default: o_alu_res = 'b0;
         endcase
     end
     else begin
-        o_alu_res <= 'd0;
-        o_valid   <= 1'b0;
+        o_alu_res = 'd0;
+        o_valid   = 1'b0;
     end
 end
+// always_ff @(posedge i_clk, negedge i_arst_n) begin
+//     if (!i_arst_n) begin
+//         o_alu_res <= 'd0;
+//         o_valid   <= 1'b0;
+//     end
+//     else if (i_enable) begin
+//         o_valid   <= 1'b1;
+//         case (i_alu_fun)
+//             // Arithmitic Operations
+//             ADD : o_alu_res <= i_operan_a + i_operan_b;
+//             SUB : o_alu_res <= i_operan_a - i_operan_b;
+//             MUL : o_alu_res <= i_operan_a * i_operan_b;
+//             DIV : o_alu_res <= i_operan_a / i_operan_b;
+//             // Logical Operations
+//             AND : o_alu_res <= i_operan_a & i_operan_b;
+//             OR  : o_alu_res <= i_operan_a | i_operan_b;
+//             XOR : o_alu_res <= i_operan_a ^ i_operan_b;
+//             NAND: o_alu_res <= ~(i_operan_a & i_operan_b);
+//             NOR : o_alu_res <= ~(i_operan_a | i_operan_b);
+//             XNOR: o_alu_res <= ~(i_operan_a ^ i_operan_b);
+//             // Comparator Operations
+//             CMPE: o_alu_res <= (i_operan_a == i_operan_b);
+//             CMPG: o_alu_res <= (i_operan_a > i_operan_b)? 'd2: 'b0;
+//             CMPL: o_alu_res <= (i_operan_a < i_operan_b)? 'd3: 'b0;
+//             // Shift Operations
+//             SLL : o_alu_res <= i_operan_a << 1;
+//             SLR : o_alu_res <= i_operan_a >> 1;
+//             // Default Output
+//             default: o_alu_res <= 'b0;
+//         endcase
+//     end
+//     else begin
+//         o_alu_res <= 'd0;
+//         o_valid   <= 1'b0;
+//     end
+// end
 
 endmodule

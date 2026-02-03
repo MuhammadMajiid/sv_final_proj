@@ -124,10 +124,7 @@ module sipo
             o_active_flag   <= 1'b0;
           end
           else begin
-            if (stop_count == final_value) begin
-              
-            end
-            else if(stop_count == (final_value-1)) begin
+            if(stop_count == (final_value-1)) begin
               test_data[0]   <= i_rx_in;
               frame_counter  <= frame_counter + 4'b1;
               o_data_parll   <= {sampled_bit,o_data_parll[10:1]};

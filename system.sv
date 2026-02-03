@@ -150,7 +150,7 @@ tx u_uart_tx (
 assign o_busy = w_busy;
 
 rx u_uart_rx (
-    .i_clk(i_uart_clk),
+    .i_clk(i_sys_clk),
     .i_arst_n(w_rst_sync2),
     .i_rx_in(i_rx_in),
     .i_par_typ(w_reg2[1]),
