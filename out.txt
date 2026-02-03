@@ -1,0 +1,10 @@
+           889757000:  OUTPUT = 80   ==   EXPECTED = 80   >> Test 0 PASSED
+          1080730000:  OUTPUT = 20   ==   EXPECTED = 20   >> Test 1 PASSED
+          1844619000:  OUTPUT = 3c   ==   EXPECTED = 3c   >> Test 2 PASSED
+          2035591000:  OUTPUT = 1e   ==   EXPECTED = 1e   >> Test 3 PASSED
+          2226564000:  OUTPUT = 5a   ==   EXPECTED = 5a   >> Test 4 PASSED
+          2330730000:  OUTPUT = 00   ==   EXPECTED = 00   >> Test 5 PASSED
+          2434897000:  OUTPUT = 1e   ==   EXPECTED = 1e   >> Test 6 PASSED
+          2539064000:  OUTPUT = 00   ==   EXPECTED = 00   >> Test 7 PASSED
+          2643231000:  OUTPUT = 02   ==   EXPECTED = 02   >> Test 8 PASSED
+          2747397000:  OUTPUT = 00   ==   EXPECTED = 00   >> Test 9 PASSED
